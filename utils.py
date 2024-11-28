@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gs
 import matplotlib.cm as cm
 
-
 # Get the directory containing the current module
 FILEDIR = os.path.dirname(os.path.abspath(__file__))
 
