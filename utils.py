@@ -47,11 +47,82 @@ def load(dataset='digits', split='train'):
     return images, labels
 
 
+def save_images(data, filename):
+    """Save images in MNIST ubyte format."""
+    with gzip.open(filename, 'wb') as f:
+        # Write MNIST magic number for images
+        f.write(np.array([0x803, len(data), 28, 28], dtype='>i4').tobytes())
+        # Write images
+        f.write(data.astype('>u1').tobytes())
+
+
+def save_labels(data, filename):
+    """Save labels in MNIST ubyte format."""
+    with gzip.open(filename, 'wb') as f:
+        # Write MNIST magic number for labels
+        f.write(np.array([0x801, len(data)], dtype='>i4').tobytes())
+        # Write labels            
+        f.write(data.astype('>u1').tobytes())
+
+
+def create_super_mnist(force=False):
+
+    # paths to output files
+    super_train_labels_path = os.path.join(FILEDIR, "super", "super-train-labels-idx1-ubyte.gz")
+    super_train_images_path = os.path.join(FILEDIR, "super", "super-train-images-idx3-ubyte.gz")
+    super_test_labels_path = os.path.join(FILEDIR, "super", "super-test-labels-idx1-ubyte.gz")
+    super_test_images_path = os.path.join(FILEDIR, "super", "super-test-images-idx3-ubyte.gz")
+
+    # check if datasets already exist
+    if force == False:
+        check = any(
+            (
+                os.path.exists(super_train_labels_path),
+                os.path.exists(super_train_images_path),
+                os.path.exists(super_test_labels_path),
+                os.path.exists(super_test_images_path)
+            )
+        )
+        if check:
+            print("Super MNIST already exists. Set force=True to overwrite.")
+            return
+
+    super_train_images = np.empty((0,784), dtype=np.uint8)
+    super_train_labels = np.empty((0,), dtype=np.uint8)
+    super_test_images = np.empty((0,784), dtype=np.uint8)
+    super_test_labels = np.empty((0,), dtype=np.uint8)
+
+    class_offset = 0
+    for dataset in ["digits", "letters", "fashion"]:
+        train_imgs, train_lbs = load(dataset=dataset, split='train')
+        test_imgs, test_lbs = load(dataset=dataset, split='test')
+
+        # concatenate the data
+        super_train_images = np.concatenate((super_train_images, train_imgs))
+        super_train_labels = np.concatenate((super_train_labels, class_offset + train_lbs))
+        super_test_images = np.concatenate((super_test_images, test_imgs))
+        super_test_labels = np.concatenate((super_test_labels, class_offset + test_lbs))
+
+        # add the flipped images
+        super_train_images = np.concatenate((super_train_images, 255 - train_imgs))
+        super_train_labels = np.concatenate((super_train_labels, class_offset + train_lbs))
+        super_test_images = np.concatenate((super_test_images, 255 - test_imgs))
+        super_test_labels = np.concatenate((super_test_labels, class_offset + test_lbs))
+
+        class_offset += 10
+
+    # save the data
+    save_images(super_train_images, super_train_images_path)
+    save_labels(super_train_labels, super_train_labels_path)
+    save_images(super_test_images, super_test_images_path)
+    save_labels(super_test_labels, super_test_labels_path) 
+
+
 def plot_image(
         image_vector, 
         shape, 
         vmin=0, 
-        vmax=1, 
+        vmax=255, 
         filename=None, 
         show=True,
         cmap=cm.gray, 
@@ -94,7 +165,7 @@ def plot_image_grid(
         image_array, 
         shape, 
         vmin=0, 
-        vmax=1, 
+        vmax=255, 
         filename=None, 
         show=True,
         cmap=cm.gray, 
@@ -139,8 +210,11 @@ def plot_image_grid(
 
 
 if __name__ == "__main__":
-    imgs, lbs = load(dataset='digits', split='train')
+    np.random.seed(42)
+    create_super_mnist(force=False)
+    imgs, lbs = load(dataset='super', split='train')
     print(imgs.shape, lbs.shape)
-
     plot_image(imgs[0], (28, 28))
-    plot_image_grid(imgs[:6].reshape(2,3,784), (28, 28))
+    random_indices = np.random.choice(len(imgs), size=6, replace=False)
+    plot_image_grid(imgs[random_indices].reshape(2,3,784), (28, 28))
+    print(lbs[random_indices])
