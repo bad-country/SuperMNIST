@@ -9,7 +9,7 @@ import matplotlib.cm as cm
 FILEDIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def load(dataset='digits', split='train'):
+def load(dataset='digits', split='train', normalize=False):
     """
     Load one of the MNIST-style datasets.
 
@@ -43,6 +43,9 @@ def load(dataset='digits', split='train'):
         images = np.frombuffer(
             imgpath.read(), dtype=np.uint8, offset=16
         ).reshape(len(labels), 784)
+
+    if normalize:
+        images = images.astype(np.float32) / 255.0
 
     return images, labels
 
