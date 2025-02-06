@@ -9,7 +9,7 @@ import matplotlib.cm as cm
 FILEDIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def load(dataset='digits', split='train'):
+def load(dataset='digits', split='train', normalize=False, sorted=False):
     """
     Load one of the MNIST-style datasets.
 
@@ -25,6 +25,8 @@ def load(dataset='digits', split='train'):
     
     assert split in ['train', 'test'], \
         "Split must be one of 'train', 'test'"
+
+    num_classes = 30 if dataset == 'super' else 10
     
     labels_path = os.path.join(
         FILEDIR, dataset, f"{dataset}-{split}-labels-idx1-ubyte.gz"
@@ -43,6 +45,14 @@ def load(dataset='digits', split='train'):
         images = np.frombuffer(
             imgpath.read(), dtype=np.uint8, offset=16
         ).reshape(len(labels), 784)
+
+    if normalize:
+        images = images.astype(np.float32) / 255.0
+
+    if sorted:
+        sorted_indices = np.argsort(labels)
+        images = images[sorted_indices]
+        labels = labels[sorted_indices]
 
     return images, labels
 
@@ -212,9 +222,10 @@ def plot_image_grid(
 if __name__ == "__main__":
     np.random.seed(42)
     create_super_mnist(force=True)
-    imgs, lbs = load(dataset='super', split='train')
+    imgs, lbs = load(dataset='super', split='train', normalize=True, sorted=True)
     print(imgs.shape, lbs.shape)
-    plot_image(imgs[0], (28, 28))
+    plot_image(imgs[0], (28, 28), vmin=0, vmax=1)
+    plot_image_grid(imgs[:6].reshape(2,3,784), (28, 28), vmin=0, vmax=1)
     random_indices = np.random.choice(len(imgs), size=6, replace=False)
-    plot_image_grid(imgs[random_indices].reshape(2,3,784), (28, 28))
+    plot_image_grid(imgs[random_indices].reshape(2,3,784), (28, 28), vmin=0, vmax=1)
     print(lbs[random_indices])
