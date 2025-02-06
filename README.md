@@ -6,10 +6,12 @@ SuperMNIST is an augmented version of the MNIST, FashionMNIST, and NotMNIST data
 
 This repo includes four datasets:
 
-- MNIST: 60,000 training images and 10,000 test images of handwritten digits (28x28 grayscale)
-- FashionMNIST: 60,000 training images and 10,000 test images of fashion items (28x28 grayscale)
-- NotMNIST: 60,000 training images and 10,000 test images of characters A-J (28x28 grayscale)
-- SuperMNIST: 360,000 training images and 10,000 test images of transformed MNIST digits (28x28 grayscale)
+
+- **MNIST (digits)**: 60,000 training images and 10,000 test images of handwritten digits (28x28 grayscale)
+- **FashionMNIST (fashion)**: 60,000 training images and 10,000 test images of fashion items (28x28 grayscale)
+- **NotMNIST (notmnist)**: 60,000 training images and 10,000 test images of characters A-J (28x28 grayscale)
+- **SuperMNIST (super)**: 360,000 training images and 10,000 test images of transformed MNIST digits (28x28 grayscale)
+
 
 MNIST, FashionMNIST, and NotMNIST all contain 10 classes, while SuperMNIST contains 30 classes.
 

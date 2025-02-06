@@ -1,19 +1,24 @@
+# MIT License
+#
 # Copyright (C) 2025 Bad Country LLC
 #
-# This file is part of MLOrchard.
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 #
-# MLOrchard is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Lesser General Public License as
-# published by the Free Software Foundation, either version 3 of
-# the License, or (at your option) any later version.
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
 #
-# MLOrchard is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with MLOrchard.  If not, see <http://www.gnu.org/licenses/>.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 import os
 import gzip
@@ -29,6 +34,11 @@ FILEDIR = os.path.dirname(os.path.abspath(__file__))
 def load(dataset='digits', split='train', normalize=False, sorted=False):
     """
     Load one of the MNIST-style datasets.
+
+    digits: MNIST
+    fashion: FashionMNIST
+    letters: NotMNIST
+    super: SuperMNIST
 
     Args:
         dataset (str): The dataset to load. Must be one of 'digits', 'fashion', 'letters', 'super'.
@@ -162,7 +172,7 @@ def plot_image(
         image_vector (np.ndarray): images in vectorized format
         shape (tuple(int, int)): shape of each 2D image
         vmin (float, optional): Defaults to 0.
-        vmax (float, optional): Defaults to 1.
+        vmax (float, optional): Defaults to 255.
         filename (str, optional): Defaults to None.
         show (bool, optional): Defaults to True.
         cmap (optional): Defaults to cm.gray.
@@ -195,8 +205,7 @@ def plot_image_grid(
         vmax=255, 
         filename=None, 
         show=True,
-        cmap=cm.gray, 
-        nan_color='red'
+        cmap=cm.gray
     ):
     """
     Plot a grid of images.
@@ -205,11 +214,10 @@ def plot_image_grid(
         image_array (np.ndarray):
         shape (tuple(int, int)):
         vmin (float, optional): Defaults to 0.
-        vmax (float, optional): Defaults to 1.
+        vmax (float, optional): Defaults to 255.
         filename (str, optional): Defaults to None.
         show (bool, optional): Defaults to True.
         cmap (optional): Defaults to cm.gray.
-        nan_color (str, optional): Defaults to 'red'.
     """
     # cast to a numpy array
     nrows, ncols = image_array.shape[:-1]
