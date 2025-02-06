@@ -1,3 +1,20 @@
+# Copyright (C) 2025 Bad Country LLC
+#
+# This file is part of MLOrchard.
+#
+# MLOrchard is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 3 of
+# the License, or (at your option) any later version.
+#
+# MLOrchard is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with MLOrchard.  If not, see <http://www.gnu.org/licenses/>.
+
 import os
 import gzip
 import numpy as np
@@ -16,6 +33,8 @@ def load(dataset='digits', split='train', normalize=False, sorted=False):
     Args:
         dataset (str): The dataset to load. Must be one of 'digits', 'fashion', 'letters', 'super'.
         split (str): The split to load. Must be one of 'train', 'test'.
+        normalize (bool, optional): Whether to normalize the images to [0,1]. Defaults to False.
+        sorted (bool, optional): Whether to sort the images by label. Defaults to False.
 
     Returns:
         tuple: A tuple containing the images and labels.
@@ -25,8 +44,6 @@ def load(dataset='digits', split='train', normalize=False, sorted=False):
     
     assert split in ['train', 'test'], \
         "Split must be one of 'train', 'test'"
-
-    num_classes = 30 if dataset == 'super' else 10
     
     labels_path = os.path.join(
         FILEDIR, dataset, f"{dataset}-{split}-labels-idx1-ubyte.gz"
@@ -220,6 +237,7 @@ def plot_image_grid(
 
 
 if __name__ == "__main__":
+    # example usage
     np.random.seed(42)
     create_super_mnist(force=True)
     imgs, lbs = load(dataset='super', split='train', normalize=True, sorted=True)
