@@ -9,7 +9,7 @@ This repo includes four datasets:
 
 - **MNIST (digits)**: 60,000 training images and 10,000 test images of handwritten digits (28x28 grayscale)
 - **FashionMNIST (fashion)**: 60,000 training images and 10,000 test images of fashion items (28x28 grayscale)
-- **NotMNIST (notmnist)**: 60,000 training images and 10,000 test images of characters A-J (28x28 grayscale)
+- **NotMNIST (letters)**: 60,000 training images and 10,000 test images of characters A-J (28x28 grayscale)
 - **SuperMNIST (super)**: 360,000 training images and 10,000 test images of transformed MNIST digits (28x28 grayscale)
 
 
