@@ -1,31 +1,38 @@
 # SuperMNIST
 
-SuperMNIST is an augmented version of the MNIST dataset that includes transformed versions of the original handwritten digits, effectively increasing the size of the training set.
+SuperMNIST is an augmented version of the MNIST, FashionMNIST, and NotMNIST datasets that includes transformed versions of the original images, effectively increasing the size of the training set and the number of classes.  It is larger and more difficult than the original datasets, yet still small enough to be used for simple machine learning experiments on a laptop.
 
 ## Dataset Description
 
-The dataset consists of:
-- Original MNIST images (28x28 grayscale)
-- Transformed versions including:
-  - Inverted images (black ↔ white)
-  - [Add other transformations you've implemented]
+This repo includes four datasets:
 
-### Dataset Size
-- Original MNIST Training Set: 60,000 images
-- SuperMNIST Training Set: 360,000 images (6x original)
-- Test Set: [Your test set size]
+
+- **MNIST (digits)**: 60,000 training images and 10,000 test images of handwritten digits (28x28 grayscale)
+- **FashionMNIST (fashion)**: 60,000 training images and 10,000 test images of fashion items (28x28 grayscale)
+- **NotMNIST (notmnist)**: 60,000 training images and 10,000 test images of characters A-J (28x28 grayscale)
+- **SuperMNIST (super)**: 360,000 training images and 10,000 test images of transformed MNIST digits (28x28 grayscale)
+
+
+MNIST, FashionMNIST, and NotMNIST all contain 10 classes, while SuperMNIST contains 30 classes.
+
+SuperMNIST is created by combining images from MNIST, FashionMNIST, and NotMNIST along with their color flipped versions. 
+
+## Performance
+
+The following are the validation accuracies for the MNIST, FashionMNIST, and NotMNIST datasets using a simple 3-layer MLP classifier with 128 hidden units.
+
+MNIST: Validation accuracy = 94%
+FashionMNIST: Validation accuracy = 85%
+NotMNIST: Validation accuracy = 91%
+SuperMNIST: Validation accuracy = 90%
 
 ## Installation
 
 ```bash
-Clone the repository
-git clone https://github.com/yourusername/SuperMNIST.git
+# Clone the repository
+git clone https://github.com/drckf/SuperMNIST.git
 cd SuperMNIST
-Create and activate conda environment
-conda create -n ml-research python=3.12
-conda activate ml-research
-Install dependencies
-pip install numpy matplotlib
+pip install -e .
 ``` 
 
 ## Usage
@@ -34,9 +41,10 @@ pip install numpy matplotlib
 python
 from utils import load_mnist, create_super_mnist
 Load the original MNIST dataset
-train_imgs, train_lbs, test_imgs, test_lbs = load_mnist()
+train_imgs, train_lbs = load_mnist(dataset='digits', split='train')
+test_imgs, test_lbs = load_mnist(dataset='digits', split='test')
 Create the augmented SuperMNIST dataset
-super_train_images, super_train_labels, super_test_images, super_test_labels = create_super_mnist()
+create_super_mnist()
 ```
 
 ## File Structure

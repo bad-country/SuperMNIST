@@ -1,0 +1,1 @@
+This is a minimalist package. If you notice a bug, please open an issue. Otherwise, we will not accept contributions with new features.
