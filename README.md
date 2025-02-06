@@ -55,7 +55,40 @@ SuperMNIST/
 Note: Large data files are stored using Git LFS. Make sure you have Git LFS installed to properly clone the repository.
 
 ## License
-[Your chosen license]
+MIT License
+
+Copyright (c) 2024 Charles K. Fisher.
+
+See LICENSE.txt for full license text.
 
 ## Acknowledgments
-- Original MNIST dataset by Yann LeCun and Corinna Cortes
+
+Please cite the following papers if you use this dataset:
+
+```
+@article{lecun2010mnist,
+  title={MNIST handwritten digit database},
+  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+  journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
+  volume={2},
+  year={2010}
+}
+
+@online{xiao2017/online,
+  author       = {Han Xiao and Kashif Rasul and Roland Vollgraf},
+  title        = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms},
+  date         = {2017-08-28},
+  year         = {2017},
+  eprintclass  = {cs.LG},
+  eprinttype   = {arXiv},
+  eprint       = {cs.LG/1708.07747},
+}
+
+@misc{bulatov2011notmnist,
+  author = {Yaroslav Bulatov},
+  title = {notMNIST dataset},
+  year = {2011},
+  month = sep,
+  url = {https://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html},
+}
+```
