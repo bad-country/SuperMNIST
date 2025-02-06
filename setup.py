@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="SuperMNIST",  # You might want to change this name
+    name="SuperMNIST", 
     version="0.1.0",
     author="Charles K. Fisher",
-    author_email="",  # Add author's email if desired
+    author_email="charleskennethfisher@gmail.com",
     description="SuperMNIST is an augmented version of the MNIST dataset with more images and categories.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/drckf/SuperMNIST",  # Add repository URL if available
+    url="https://github.com/drckf/SuperMNIST",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
