@@ -47,6 +47,11 @@ setup(
     ],
     include_package_data=True,
     package_data={
-        "": ["*/digits/*.gz", "*/fashion/*.gz", "*/letters/*.gz", "*/super/*.gz"],
+        "supermnist": [
+            "digits/*.gz",
+            "fashion/*.gz",
+            "letters/*.gz",
+            "super/*.gz",
+        ],
     },
 )
