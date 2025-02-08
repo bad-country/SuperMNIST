@@ -1,0 +1,4 @@
+recursive-include supermnist/digits *.gz
+recursive-include supermnist/fashion *.gz
+recursive-include supermnist/letters *.gz
+recursive-include supermnist/super *.gz
