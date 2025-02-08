@@ -33,7 +33,7 @@ setup(
     description="SuperMNIST is an augmented version of the MNIST dataset with more images and categories.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/drckf/SuperMNIST",
+    url="https://github.com/bad-country/SuperMNIST",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -45,7 +45,8 @@ setup(
         "numpy",
         "matplotlib",
     ],
+    include_package_data=True,
     package_data={
-        "": ["*/digits/*", "*/fashion/*", "*/letters/*", "*/super/*"],
+        "": ["*/digits/*.gz", "*/fashion/*.gz", "*/letters/*.gz", "*/super/*.gz"],
     },
 )
